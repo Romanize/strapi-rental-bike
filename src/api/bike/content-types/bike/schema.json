@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bikes",
+  "info": {
+    "singularName": "bike",
+    "pluralName": "bikes",
+    "displayName": "Bike",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "model": {
+      "type": "string",
+      "required": true
+    },
+    "rate": {
+      "type": "decimal",
+      "default": 5,
+      "required": true,
+      "min": 1,
+      "max": 5
+    },
+    "available": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    }
+  }
+}
