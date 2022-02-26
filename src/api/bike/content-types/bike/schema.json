@@ -16,17 +16,32 @@
       "type": "string",
       "required": true
     },
-    "rate": {
-      "type": "decimal",
-      "default": 5,
-      "required": true,
-      "min": 1,
-      "max": 5
-    },
     "available": {
       "type": "boolean",
       "default": true,
       "required": true
+    },
+    "color": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::color.color"
+    },
+    "location": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::location.location"
+    },
+    "rentals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rental.rental",
+      "mappedBy": "bike"
+    },
+    "rates": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rate.rate",
+      "mappedBy": "bike"
     }
   }
 }
