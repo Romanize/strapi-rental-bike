@@ -63,17 +63,17 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "rentals": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::rental.rental",
-      "mappedBy": "users_permissions_user"
-    },
     "rates": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::rate.rate",
-      "mappedBy": "users_permissions_user"
+      "mappedBy": "user"
+    },
+    "rentals": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::rental.rental",
+      "mappedBy": "user"
     }
   }
 }

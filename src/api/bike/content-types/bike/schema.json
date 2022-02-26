@@ -42,6 +42,13 @@
       "relation": "oneToMany",
       "target": "api::rate.rate",
       "mappedBy": "bike"
+    },
+    "size": {
+      "type": "integer",
+      "max": 32,
+      "min": 10,
+      "required": true,
+      "default": 26
     }
   }
 }

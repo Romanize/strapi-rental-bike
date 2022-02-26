@@ -10,6 +10,7 @@ module.exports = plugin => {
     if (!ctx.state.user) {
       return ctx.unauthorized();
     }
+    
     const user = await strapi.entityService.findOne(
       'plugin::users-permissions.user',
       ctx.state.user.id,
@@ -21,7 +22,6 @@ module.exports = plugin => {
   };
 
   plugin.controllers.user.find = async (ctx) => {
-    console.log(plugin.controllers.user)
     if (!ctx.state.user) {
       return ctx.unauthorized();
     }
@@ -36,6 +36,24 @@ module.exports = plugin => {
         role: sanitized.role.name
       }
     })
+  }
+
+  plugin.controllers.user.findOne = async (ctx) => {
+    if(!ctx.state.user) {
+      return ctx.unauthorized();
+    }
+
+    const id = ctx.request.params.id;
+    const query = ctx.request.query;
+
+    const user = await strapi.entityService.findOne(
+      'plugin::users-permissions.user',
+      id,
+      query
+    )
+
+    const sanitized = sanitizeOutput(user);
+    ctx.body = sanitized
   }
 
   return plugin

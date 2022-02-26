@@ -25,12 +25,12 @@
     "endDate": {
       "type": "date"
     },
-    "locations": {
+    "location": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::location.location"
     },
-    "users_permissions_user": {
+    "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
