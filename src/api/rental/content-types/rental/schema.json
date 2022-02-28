@@ -35,6 +35,10 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "rentals"
+    },
+    "user_temp": {
+      "type": "integer",
+      "required": true
     }
   }
 }
