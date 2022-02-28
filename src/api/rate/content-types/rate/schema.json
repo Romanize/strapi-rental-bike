@@ -30,6 +30,10 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "rates"
+    },
+    "user_temp": {
+      "type": "integer",
+      "required": true
     }
   }
 }
