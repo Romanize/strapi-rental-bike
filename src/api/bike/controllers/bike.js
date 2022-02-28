@@ -9,46 +9,36 @@ const { createCoreController } = require("@strapi/strapi").factories;
 module.exports = createCoreController("api::bike.bike", ({ strapi }) => ({
   available: async (ctx) => {
     const { query } = ctx.request;
-    console.log(query);
+    
+    if (!query.location || !query.startDate || !query.endDate) {
+      return ctx.badRequest('location, startDate and endDate are required')
+    }
 
     const response = await strapi.db.query("api::bike.bike").findMany({
       where: {
+        location: {
+          name: {
+            $eq: query.location,
+          }
+        },
         $not: {
           rentals: {
             $or: [
               {
-                $and: [
-                  {
-                    startDate: {
-                      $gte: query.startDate,
-                    },
-                  },
-                  {
-                    endDate: {
-                      $lte: query.endDate,
-                    },
-                  },
-                ],
+                startDate: {
+                  $between: [query.startDate, query.endDate],
+                },
               },
               {
-                $or: [
-                  {
-                    startDate: {
-                      $between: [query.startDate, query.endDate],
-                    },
-                  },
-                  {
-                    endDate: {
-                      $between: [query.startDate, query.endDate],
-                    },
-                  },
-                ],
+                endDate: {
+                  $between: [query.startDate, query.endDate],
+                },
               },
             ],
           },
         },
       },
-      populate: ["rentals"],
+      populate: ["location", "color", "pictures"],
     });
 
     ctx.body = response;

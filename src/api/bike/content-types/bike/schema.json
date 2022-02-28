@@ -49,6 +49,14 @@
       "min": 10,
       "required": true,
       "default": 26
+    },
+    "pictures": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true,
+      "required": true
     }
   }
 }
