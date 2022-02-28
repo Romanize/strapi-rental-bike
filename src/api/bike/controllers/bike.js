@@ -17,38 +17,49 @@ module.exports = createCoreController("api::bike.bike", ({ strapi }) => ({
     const response = await strapi.db.query("api::bike.bike").findMany({
       where: {
         $not: {
-          rentals: {
-            $or: [
-              {
-                $and: [
+          $and: [
+            {
+              rentals: {
+                $or: [
                   {
-                    startDate: {
-                      $gte: query.startDate
-                    }
+                    $and: [
+                      {
+                        startDate: {
+                          $gte: query.startDate
+                        }
+                      },
+                      {
+                        startDate: {
+                          $lte: query.endDate
+                        }
+                      }
+                    ]
                   },
                   {
-                    startDate: {
-                      $lte: query.endDate
-                    }
+                    $and: [
+                      {
+                        endDate: {
+                          $gte: query.startDate
+                        }
+                      },
+                      {
+                        endDate: {
+                          $lte: query.endDate
+                        }
+                      }
+                    ]
                   }
                 ]
               },
-              {
-                $and: [
-                  {
-                    endDate: {
-                      $gte: query.startDate
-                    }
-                  },
-                  {
-                    endDate: {
-                      $lte: query.endDate
-                    }
-                  }
-                ]
+            },
+            {
+              rentals: {
+                startDate: {
+                  $null: false
+                }
               }
-            ]
-          },
+            }
+          ]
         },
       },
       populate: ['rentals', 'color', 'location', 'rates'],
