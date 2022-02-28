@@ -20,14 +20,32 @@ module.exports = createCoreController("api::bike.bike", ({ strapi }) => ({
           rentals: {
             $or: [
               {
-                startDate: {
-                  $between: [query.startDate,query.endDate]
-                }
+                $and: [
+                  {
+                    startDate: {
+                      $gte: query.startDate
+                    }
+                  },
+                  {
+                    startDate: {
+                      $lte: query.endDate
+                    }
+                  }
+                ]
               },
               {
-                endDate: {
-                  $between: [query.startDate, query.endDate]
-                }
+                $and: [
+                  {
+                    endDate: {
+                      $gte: query.startDate
+                    }
+                  },
+                  {
+                    endDate: {
+                      $lte: query.endDate
+                    }
+                  }
+                ]
               }
             ]
           },
